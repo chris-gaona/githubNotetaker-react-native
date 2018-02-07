@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet} from "react-native";
+import {Text, View, StyleSheet, TextInput, TouchableHighlight} from "react-native";
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -46,10 +46,48 @@ const styles = StyleSheet.create({
 });
 
 export default class Main extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: '',
+      isLoading: false,
+      error: false
+    }
+  }
+
+  handleChange(ev) {
+    this.setState({
+      username: ev.nativeEvent.text
+    })
+  }
+
+  handleSubmit(ev) {
+    // update our indicatorIOS spinner
+    this.setState({
+      isLoading: true
+    });
+    console.log('SUBMIT', this.state.username);
+    // fetch data from github
+    // reroute to next route passing github info
+  }
+
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Text>Testing the router</Text>
+        <Text style={styles.title}>Search for a Github User</Text>
+        <TextInput
+          style={styles.searchInput}
+          value={this.state.username}
+          onChange={this.handleChange.bind(this)}
+        />
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.handleSubmit.bind(this)}
+          underlayColor="white"
+        >
+          <Text style={styles.buttonText}>SEARCH</Text>
+        </TouchableHighlight>
       </View>
     )
   }
