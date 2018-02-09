@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TextInput, TouchableHighlight} from "react-native";
+import Api from "../Utils/Api";
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -69,6 +70,29 @@ export default class Main extends Component {
     });
     console.log('SUBMIT', this.state.username);
     // fetch data from github
+    Api.getBio(this.state.username)
+      .then(res => {
+        if (res.message === 'Not Found') {
+          this.setState({
+            error: 'User not found',
+            isLoading: false
+          })
+        } else {
+          this.props.navigator.push({
+            title: res.name || "Select an Option",
+            component: Dashboard,
+            passProps: {userInfo: res}
+          });
+
+          this.setState({
+            isLoading: false,
+            error: false,
+            username: ''
+          })
+        }
+      }).catch(err => {
+
+      });
     // reroute to next route passing github info
   }
 
