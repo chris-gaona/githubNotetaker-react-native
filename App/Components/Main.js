@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TextInput, TouchableHighlight} from "react-native";
 import Api from "../Utils/Api";
+import Dashboard from "./Dashboard";
 
 const styles = StyleSheet.create({
   mainContainer: {
