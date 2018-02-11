@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, Image, TouchableHighlight} from "react-native";
+import Profile from './Profile';
 
 const styles = StyleSheet.create({
   container: {
@@ -38,17 +39,30 @@ export default class Dashboard extends Component {
 
   goToProfile(){
     console.log('Going to Profile Page');
+    this.props.navigator.push({
+      title: 'Profile Page',
+      component: Profile,
+      passProps: {userInfo: this.props.userInfo}
+    });
   }
   goToRepos(){
     console.log('Going to Repos Page');
+    // this.props.navigator.push({
+    //   title: 'Repos Page',
+    //   component: Profile,
+    //   passProps: {userInfo: this.props.userInfo}
+    // });
   }
   goToNotes(){
     console.log('Going to Notes Page');
+    // this.props.navigator.push({
+    //   title: 'Profile Page',
+    //   component: Profile,
+    //   passProps: {userInfo: this.props.userInfo}
+    // });
   }
 
   render() {
-    console.log('userInfo', this.props.userInfo);
-
     return (
       <View style={styles.container}>
         <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image} />

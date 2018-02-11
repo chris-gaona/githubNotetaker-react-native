@@ -6,7 +6,7 @@ import {
   Image,
   StyleSheet
 } from 'react-native';
-import * as PropTypes from "react-native";
+import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
 });
 
 export default class Badge extends Component{
-  render(){
+  render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.image} source={{this.props.userInfo.avatar_url}} />
+        <Image style={styles.image} source={{uri: this.props.userInfo.avatar_url}} />
         <Text style={styles.name}> {this.props.userInfo.name} </Text>
         <Text style={styles.name}> {this.props.userInfo.login} </Text>
       </View>
