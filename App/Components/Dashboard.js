@@ -37,7 +37,7 @@ export default class Dashboard extends Component {
     return obj;
   }
 
-  goToProfile(){
+  goToProfile() {
     console.log('Going to Profile Page');
     this.props.navigator.push({
       title: 'Profile Page',
@@ -45,7 +45,7 @@ export default class Dashboard extends Component {
       passProps: {userInfo: this.props.userInfo}
     });
   }
-  goToRepos(){
+  goToRepos() {
     console.log('Going to Repos Page');
     // this.props.navigator.push({
     //   title: 'Repos Page',
@@ -53,7 +53,7 @@ export default class Dashboard extends Component {
     //   passProps: {userInfo: this.props.userInfo}
     // });
   }
-  goToNotes(){
+  goToNotes() {
     console.log('Going to Notes Page');
     // this.props.navigator.push({
     //   title: 'Profile Page',
