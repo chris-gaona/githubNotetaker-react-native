@@ -3,6 +3,7 @@ import {Text, View, StyleSheet, Image, TouchableHighlight} from "react-native";
 import Profile from './Profile';
 import Repositories from './Repositories';
 import Api from '../Utils/Api';
+import Notes from './Notes';
 
 const styles = StyleSheet.create({
   container: {
@@ -60,12 +61,19 @@ export default class Dashboard extends Component {
       });
   }
   goToNotes() {
-    console.log('Going to Notes Page');
-    // this.props.navigator.push({
-    //   title: 'Profile Page',
-    //   component: Profile,
-    //   passProps: {userInfo: this.props.userInfo}
-    // });
+    Api.getNotes(this.props.userInfo.login)
+      .then(res => {
+        res = res || {};
+
+        this.props.navigator.push({
+          title: 'Notes',
+          component: Notes,
+          passProps: {
+            userInfo: this.props.userInfo,
+            notes: res
+          }
+        });
+      });
   }
 
   render() {
