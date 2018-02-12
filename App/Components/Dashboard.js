@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, Image, TouchableHighlight} from "react-native";
 import Profile from './Profile';
+import Repositories from './Repositories';
+import Api from '../Utils/Api';
 
 const styles = StyleSheet.create({
   container: {
@@ -38,20 +40,24 @@ export default class Dashboard extends Component {
   }
 
   goToProfile() {
-    console.log('Going to Profile Page');
     this.props.navigator.push({
-      title: 'Profile Page',
+      title: 'Profile',
       component: Profile,
       passProps: {userInfo: this.props.userInfo}
     });
   }
   goToRepos() {
-    console.log('Going to Repos Page');
-    // this.props.navigator.push({
-    //   title: 'Repos Page',
-    //   component: Profile,
-    //   passProps: {userInfo: this.props.userInfo}
-    // });
+    Api.getRepos(this.props.userInfo.login)
+      .then(res => {
+        this.props.navigator.push({
+          title: 'Repos',
+          component: Repositories,
+          passProps: {
+            userInfo: this.props.userInfo,
+            repos: res
+          }
+        });
+      });
   }
   goToNotes() {
     console.log('Going to Notes Page');
