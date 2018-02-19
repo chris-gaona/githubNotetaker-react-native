@@ -46,10 +46,8 @@ export default class Notes extends Component {
     super(props);
 
     this.state = {
-      notes: [],
       note: '',
       loading: false,
-      data: [],
       error: null,
       refreshing: false,
     };
