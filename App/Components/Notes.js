@@ -28,12 +28,16 @@ const styles = StyleSheet.create({
     flex: 10
   },
   rowContainer: {
-    padding: 10
+    padding: 10,
   },
   footerContainer: {
     backgroundColor: '#E3E3E3',
     alignItems: 'center',
     flexDirection: 'row'
+  },
+  note: {
+    marginBottom: 15,
+    fontSize: 20,
   }
 });
 
@@ -57,22 +61,24 @@ export default class Notes extends Component {
       note: ''
     });
 
-    Api.addNote(this.props.userInfo.login, note)
-      .then(data => {
-        Api.getNotes(this.props.userInfo.login)
-          .then(data => {
-            this.setState({
-              notes: data
-            })
-          })
-      }).catch(err => {
-        console.log('Request failed', err);
-        this.setState({
-          err,
-          loading: false,
-          refreshing: false
-        })
-    });
+    Api.addNote(this.props.userInfo.login, note);
+
+    // Api.addNote(this.props.userInfo.login, note)
+    //   .then(data => {
+    //     Api.getNotes(this.props.userInfo.login)
+    //       .then(data => {
+    //         this.setState({
+    //           notes: data
+    //         })
+    //       })
+    //   }).catch(err => {
+    //     console.log('Request failed', err);
+    //     this.setState({
+    //       err,
+    //       loading: false,
+    //       refreshing: false
+    //     })
+    // });
   }
 
   handleChange(ev) {
@@ -103,11 +109,13 @@ export default class Notes extends Component {
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.state.notes}
-          renderItem={({note}) => (
+          data={this.props.notes}
+          renderItem={(note) => (
             <View
-              style={styles.rowContainer}
-              title={note}/>
+              style={styles.rowContainer}>
+              <Text style={styles.note}>{note.item.key}</Text>
+              <Separator/>
+            </View>
           )}
         />
         {this.footer()}

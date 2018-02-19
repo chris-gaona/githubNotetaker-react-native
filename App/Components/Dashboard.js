@@ -61,19 +61,14 @@ export default class Dashboard extends Component {
       });
   }
   goToNotes() {
-    Api.getNotes(this.props.userInfo.login)
-      .then(res => {
-        res = res || {};
-
-        this.props.navigator.push({
-          title: 'Notes',
-          component: Notes,
-          passProps: {
-            userInfo: this.props.userInfo,
-            notes: res
-          }
-        });
-      });
+    this.props.navigator.push({
+      title: 'Notes',
+      component: Notes,
+      passProps: {
+        userInfo: this.props.userInfo,
+        notes: Api.getNotes(this.props.userInfo.login)
+      }
+    });
   }
 
   render() {
