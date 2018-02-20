@@ -51,6 +51,20 @@ export default class Notes extends Component {
       error: null,
       refreshing: false,
     };
+
+    // this.realm = new Realm({schema:['Note']})
+    this.realm = Api.getRealm();
+    this.realm.addListener('change', () => {
+      this.setState({
+        notes: Api.getNotes(this.props.userInfo.login)
+      })
+    });
+  }
+
+  componentWillMount() {
+    this.setState({
+      notes: Api.getNotes(this.props.userInfo.login)
+    });
   }
 
   handleSubmit(ev) {
@@ -90,7 +104,7 @@ export default class Notes extends Component {
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.props.notes}
+          data={this.state.notes}
           renderItem={(note) => (
             <View
               style={styles.rowContainer}>
@@ -106,6 +120,5 @@ export default class Notes extends Component {
 }
 
 Notes.propTypes = {
-  userInfo: PropTypes.object.isRequired,
-  notes: PropTypes.object.isRequired
+  userInfo: PropTypes.object.isRequired
 };

@@ -66,7 +66,6 @@ export default class Dashboard extends Component {
       component: Notes,
       passProps: {
         userInfo: this.props.userInfo,
-        notes: Api.getNotes(this.props.userInfo.login)
       }
     });
   }

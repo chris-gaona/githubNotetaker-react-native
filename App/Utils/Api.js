@@ -43,6 +43,9 @@ const Api = {
         key: note
       });
     });
+  },
+  getRealm() {
+    return realm;
   }
 };
 
