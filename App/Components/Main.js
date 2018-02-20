@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TextInput, TouchableHighlight, ActivityIndicator} from "react-native";
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  View
+} from "react-native";
 import Api from "../Utils/Api";
 import Dashboard from "./Dashboard";
 
@@ -16,7 +24,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 25,
     textAlign: 'center',
-    color: '#fff'
+    color: '#fff',
+    height: 45,
   },
   searchInput: {
     height: 50,
@@ -69,7 +78,7 @@ export default class Main extends Component {
     this.setState({
       isLoading: true
     });
-    console.log('SUBMIT', this.state.username);
+
     // fetch data from github
     Api.getBio(this.state.username)
       .then(res => {
@@ -98,11 +107,16 @@ export default class Main extends Component {
   }
 
   render() {
-    const showErr = this.state.error ? <Text> {this.state.error} </Text> : <View></View>;
+    const showErr = this.state.error ? <Text> {this.state.error} </Text> : <View/>;
 
     return (
-      <View style={styles.mainContainer}>
-        <Text style={styles.title}>Search for a Github User</Text>
+      <KeyboardAvoidingView
+        style={styles.mainContainer}
+        keyboardVerticalOffset={-100}
+        behavior="position">
+        <Text style={styles.title}>
+          Search for a Github User
+        </Text>
         <TextInput
           style={styles.searchInput}
           value={this.state.username}
@@ -121,7 +135,7 @@ export default class Main extends Component {
           size="large">
         </ActivityIndicator>
         {showErr}
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }

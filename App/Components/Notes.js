@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
+import {FlatList, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import Api from '../Utils/Api';
 import Separator from './Helpers/Separator';
 import PropTypes from 'prop-types';
@@ -102,7 +102,9 @@ export default class Notes extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior="padding">
         <FlatList
           data={this.state.notes}
           renderItem={(note) => (
@@ -114,7 +116,7 @@ export default class Notes extends Component {
           )}
         />
         {this.footer()}
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
