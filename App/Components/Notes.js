@@ -55,9 +55,11 @@ export default class Notes extends Component {
     // this.realm = new Realm({schema:['Note']})
     this.realm = Api.getRealm();
     this.realm.addListener('change', () => {
-      this.setState({
-        notes: Api.getNotes(this.props.userInfo.login)
-      })
+      if (this.refs.myRef) {
+        this.setState({
+          notes: Api.getNotes(this.props.userInfo.login)
+        })
+      }
     });
   }
 
@@ -103,6 +105,7 @@ export default class Notes extends Component {
   render() {
     return (
       <KeyboardAvoidingView
+        ref="myRef"
         style={styles.container}
         behavior="padding">
         <FlatList
