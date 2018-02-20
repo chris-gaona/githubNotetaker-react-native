@@ -36,11 +36,6 @@ const Api = {
   },
   addNote(username, note) {
     username = username.toLowerCase().trim();
-    // const url = `https://github-saver-5a9af.firebaseio.com/${username}.json`;
-    // return fetch(url, {
-    //   method: 'post',
-    //   body: JSON.stringify(note)
-    // }).then(res => res.json());
 
     realm.write(() => {
       realm.create(Note.schema.name, {

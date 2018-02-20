@@ -60,23 +60,6 @@ export default class Notes extends Component {
     });
 
     Api.addNote(this.props.userInfo.login, note);
-
-    // Api.addNote(this.props.userInfo.login, note)
-    //   .then(data => {
-    //     Api.getNotes(this.props.userInfo.login)
-    //       .then(data => {
-    //         this.setState({
-    //           notes: data
-    //         })
-    //       })
-    //   }).catch(err => {
-    //     console.log('Request failed', err);
-    //     this.setState({
-    //       err,
-    //       loading: false,
-    //       refreshing: false
-    //     })
-    // });
   }
 
   handleChange(ev) {
